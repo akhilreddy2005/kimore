@@ -1,4 +1,14 @@
- :root { --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kimoré Labs — Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+     :root { --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     [data-theme="dark"] {
       --bg:#0d0c0b; --bg2:#141210; --bg3:#1c1916; --surface:#201d1a;
       --border:rgba(201,169,110,0.15); --gold:#c9a96e; --gold-light:#e8d5b0;
@@ -435,24 +445,356 @@
       .hero-launch-info { flex-direction: column; border-radius: 14px; }
       .launch-divider { width: 80%; height: 1px; }
     }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div id="progress-bar"></div>
+<div class="toast" id="toast"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">KIMORÉ</a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
+      <i class="fa-solid fa-sun" id="themeIcon"></i>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="#hero"    onclick="closeDrawer()">Home</a>
+  <a href="#about"   onclick="closeDrawer()">About</a>
+  <a href="#contact" onclick="closeDrawer()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">✦ A New Era of Style ✦</p>
+  <h1 class="hero-title">Something<br><em>COOL</em><br>Is Coming</h1>
+  <p class="hero-sub">An exclusive boutique experience curated for those who appreciate elegance, craft, and timeless fashion.</p>
+
+  <div class="gold-line"></div>
+
+  <div class="hero-pills">
+    <span class="pill"><i class="fa-solid fa-gem"></i> Street Curation</span>
+    <span class="pill"><i class="fa-solid fa-star"></i> Exclusive Pieces</span>
+    <span class="pill"><i class="fa-solid fa-leaf"></i> Sustainably Made</span>
+  </div>
+
+  <div class="hero-launch-info">
+    <div class="launch-card">
+      <i class="fa-regular fa-calendar-check"></i>
+      <div>
+        <span class="launch-card-label">Grand Opening</span>
+        <span class="launch-card-value">Coming 2026</span>
+      </div>
+    </div>
+    <div class="launch-divider"></div>
+    <div class="launch-card">
+      <i class="fa-solid fa-location-dot"></i>
+      <div>
+        <span class="launch-card-label">Location</span>
+        <span class="launch-card-value">Bengaluru, India</span>
+      </div>
+    </div>
+    <div class="launch-divider"></div>
+    <div class="launch-card">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <div>
+        <span class="launch-card-label">Experience</span>
+        <span class="launch-card-value">Online</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subscribe-row">
+    <input type="email" id="emailInput" placeholder="Your email address…" />
+    <button onclick="subscribe()">Notify Me</button>
+  </div>
+
+  <div class="scroll-hint" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <div class="arrow"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div>
+      <p class="about-label reveal">Our Story</p>
+      <h2 class="about-title reveal reveal-delay-1">Crafted for the<br><span>Discerning</span> Few</h2>
+      <p class="about-text reveal reveal-delay-2">
+        Kimoré Labs is more than a store — it is a sanctuary for those who seek beauty in every detail. We are curating a collection that blends modern sensibility with timeless craftsmanship, sourced from artisans who share our passion for excellence.
+      </p>
+      <ul class="about-features reveal reveal-delay-3">
+        <li><span class="icon-dot"></span> Handpicked Cool collections</li>
+        <li><span class="icon-dot"></span> Exclusive online experience</li>
+        <li><span class="icon-dot"></span> Personalised styling consultations</li>
+        <li><span class="icon-dot"></span> Sustainably sourced, ethically made</li>
+      </ul>
+    </div>
+    <div class="about-visual reveal reveal-delay-2">
+      <div class="about-ring">
+        <span class="orbit-dot"></span>
+        <span class="orbit-dot"></span>
+        <span class="orbit-dot"></span>
+        <span class="orbit-dot"></span>
+        <div class="about-ring-inner">
+          <i class="fa-solid fa-gem about-icon-big"></i>
+          <span class="about-ring-text">Est. 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-label reveal">Get in Touch</span>
+    <h2 class="section-title reveal reveal-delay-1">Let's <em>Connect</em></h2>
+  </div>
+  <div class="contact-inner">
+    <div class="form-group reveal reveal-delay-1">
+      <div class="field"><input type="text" id="fname" placeholder="Your Name" /></div>
+      <div class="field"><input type="email" id="femail" placeholder="Email Address" /></div>
+      <div class="field"><textarea id="fmsg" placeholder="Your Message…"></textarea></div>
+      <button class="btn-primary" onclick="sendMessage()">
+        <i class="fa-solid fa-paper-plane"></i> Send Message
+      </button>
+    </div>
+    <div class="contact-info reveal reveal-delay-2">
+      <div class="info-item">
+        <span class="info-label">Location</span>
+        <span class="info-value">Banglore-India</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Email</span>
+        <span class="info-value"><a href="mailto:hello@Kimorelabs.in">hello@Kimorelabs.in</a></span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Phone</span>
+        <span class="info-value">+91 12345 67890</span>
+      </div>
+      <div>
+        <p class="social-title">Follow Our Journey</p>
+        <div class="social-links">
+          <a href="#" class="social-link" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-link" target="_blank" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+          <a href="#" class="social-link" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" class="social-link" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Kimoré</span>
+  <p class="footer-tag">Where elegance meets intention.</p>
+  <p class="footer-copy">© 2025 Kimoré Labs. All rights reserved.</p>
+</footer>
+
+<script src="script.js">
+     /* Theme Toggle */
+  const html = document.documentElement;
+  const themeBtn = document.getElementById('themeBtn');
+  const themeIcon = document.getElementById('themeIcon');
+  themeBtn.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    themeIcon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+  });
+
+  /* Navbar scroll */
+  const navbar = document.getElementById('navbar');
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    progressBar.style.width = pct + '%';
+  });
+
+  /* Hamburger / Drawer */
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('mobileDrawer');
+  const overlay   = document.getElementById('drawerOverlay');
+  function closeDrawer() {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    drawer.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+  });
+  overlay.addEventListener('click', closeDrawer);
+
+  /* Toast */
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  /* Subscribe */
+  function subscribe() {
+    const val = document.getElementById('emailInput').value.trim();
+    if (!val || !val.includes('@')) { showToast('⚠ Please enter a valid email.'); return; }
+    document.getElementById('emailInput').value = '';
+    showToast("✨ You're on the list! We'll be in touch.");
+  }
+
+  /* Contact Form */
+  function sendMessage() {
+    const n = document.getElementById('fname').value.trim();
+    const e = document.getElementById('femail').value.trim();
+    const m = document.getElementById('fmsg').value.trim();
+    if (!n || !e || !m) { showToast('⚠ Please fill all fields.'); return; }
+    document.getElementById('fname').value  = '';
+    document.getElementById('femail').value = '';
+    document.getElementById('fmsg').value   = '';
+    showToast("✉ Message sent! We'll respond soon.");
+  }
+
+  /* Scroll Reveal */
+  const reveals  = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(r => observer.observe(r));
+
+  /* Particles */
+  const canvas = document.getElementById('particles');
+  const ctx    = canvas.getContext('2d');
+
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const pts = Array.from({ length: 55 }, () => ({
+    x:  Math.random() * window.innerWidth,
+    y:  Math.random() * window.innerHeight,
+    r:  Math.random() * 1.4 + 0.3,
+    dx: (Math.random() - 0.5) * 0.3,
+    dy: (Math.random() - 0.5) * 0.3,
+    o:  Math.random() * 0.5 + 0.1
+  }));
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    const color  = isDark ? '201,169,110' : '154,106,42';
+    pts.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${color},${p.o})`;
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width)  p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+</script>
+</body>
+</html>
 
 
-    .subscribe-form {
-  display: flex;
-  width: 100%;
-}
 
-.subscribe-form input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 16px;
-  border-radius: 30px 0 0 30px;
-}
 
-.subscribe-form button {
-  border: none;
-  padding: 16px 28px;
-  border-radius: 0 30px 30px 0;
-  cursor: pointer;
-}
+
+
+
+
+========================================================
+
+
+
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAzqlIiBZfJ7SzVOYSConOM1q594b3c-8M",
+    authDomain: "kimore.firebaseapp.com",
+    projectId: "kimore",
+    storageBucket: "kimore.firebasestorage.app",
+    messagingSenderId: "276399876050",
+    appId: "1:276399876050:web:cc3aba1b8b7cc6d4ad4a0b",
+    measurementId: "G-BHR060JEFQ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+
+
+
+
+
+
+
+
+
+npm install firebase
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAzqlIiBZfJ7SzVOYSConOM1q594b3c-8M",
+  authDomain: "kimore.firebaseapp.com",
+  projectId: "kimore",
+  storageBucket: "kimore.firebasestorage.app",
+  messagingSenderId: "276399876050",
+  appId: "1:276399876050:web:cc3aba1b8b7cc6d4ad4a0b",
+  measurementId: "G-BHR060JEFQ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+
+
+npm install -g firebase-tools
+
+firebase login
+firebase init
+firebase deploy
